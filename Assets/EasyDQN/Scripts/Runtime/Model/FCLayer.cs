@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace AillieoUtils.AI
 {
@@ -25,9 +26,37 @@ namespace AillieoUtils.AI
         // b二阶动量
         public Matrix vb;
 
+        public FCLayer(int inCount, int outCount)
+        {
+            w = Xavier(inCount, outCount);
+            b = new Matrix(1, outCount);
+            dw = new Matrix(inCount, outCount);
+            db = new Matrix(1, outCount);
+            mw = new Matrix(inCount, outCount);
+            vw = new Matrix(inCount, outCount);
+            mb = new Matrix(1, outCount);
+            vb = new Matrix(1, outCount);
+        }
 
+        private FCLayer()
+        { }
 
         private Matrix input;
+
+        private static Matrix Xavier(int inCount, int outCount)
+        {
+            Matrix u = new Matrix(inCount, outCount);
+            float un = Mathf.Sqrt(1.0f / (inCount * outCount));
+
+            for (int i = 0; i < inCount; i++)
+            {
+                for (int j = 0; j < outCount; j++)
+                {
+                    u[i, j] = Random.Range(-un, un);
+                }
+            }
+            return u;
+        }
 
         public override Matrix Forward(Matrix data)
         {
@@ -78,7 +107,16 @@ namespace AillieoUtils.AI
 
         public override Layer DeepCopy()
         {
-            throw new NotImplementedException();
+            FCLayer layer = new FCLayer();
+            layer.w = this.w.DeepCopy();
+            layer.b = this.b.DeepCopy();
+            layer.dw = this.dw.DeepCopy();
+            layer.dw = this.dw.DeepCopy();
+            layer.mw = this.mw.DeepCopy();
+            layer.vw = this.vw.DeepCopy();
+            layer.mb = this.mb.DeepCopy();
+            layer.vb = this.vb.DeepCopy();
+            return layer;
         }
     }
 

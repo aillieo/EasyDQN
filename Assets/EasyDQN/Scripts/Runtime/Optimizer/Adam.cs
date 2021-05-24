@@ -42,29 +42,35 @@ namespace AillieoUtils.AI
 
         public void Step(Net net, float maxGradNorm, int batchSize)
         {
+            var fcLayers = net.GetFCLayers();
+
             // clip_coef限制 防止梯度爆炸和梯度消失
-            float normSum = (float)(
-                net.layer1.w.SqrFNorm() +
-                net.layer1.b.SqrFNorm() +
-                net.layer3.w.SqrFNorm() +
-                net.layer3.b.SqrFNorm());
+            float normSum = 0f;
+            foreach(var layer in fcLayers)
+            {
+                normSum += (float)layer.w.SqrFNorm();
+                normSum += (float)layer.b.SqrFNorm();
+            }
 
             normSum = Mathf.Sqrt(normSum);
 
             float clipCoef = (float)(maxGradNorm / (normSum + 1e-6));
             if (clipCoef < 1)
             {
-                net.layer1.dw *= clipCoef;
-                net.layer1.db *= clipCoef;
-                net.layer3.dw *= clipCoef;
-                net.layer3.db *= clipCoef;
+                foreach (var layer in fcLayers)
+                {
+                    layer.dw *= clipCoef;
+                    layer.db *= clipCoef;
+                }
             }
 
             t++;
+
             // 更新layer梯度
-            Step(net.layer1, batchSize);
-            Step(net.layer3, batchSize);
+            foreach (var layer in fcLayers)
+            {
+                Step(layer, batchSize);
+            }
         }
     }
-
 }

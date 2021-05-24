@@ -52,7 +52,7 @@ namespace AillieoUtils.AI
 
         public override Layer DeepCopy()
         {
-            throw new NotImplementedException();
+            return new ReLULayer();
         }
     }
 }
