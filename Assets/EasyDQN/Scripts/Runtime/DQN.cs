@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace AillieoUtils.AI
 {
+    [System.Serializable]
     public class DQN
     {
         private MemoryReplay<Experience> experiences;

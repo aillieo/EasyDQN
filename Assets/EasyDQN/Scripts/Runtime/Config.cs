@@ -1,5 +1,8 @@
+using System;
+
 namespace AillieoUtils.AI
 {
+    [System.Serializable]
     public class Config
     {
         public readonly int batch_capacity = 2048;

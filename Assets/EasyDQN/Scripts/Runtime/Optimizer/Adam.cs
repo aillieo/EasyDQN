@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AillieoUtils.AI
 {
+    [System.Serializable]
     public class Adam
     {
         private static readonly float eps = 1e-8f;

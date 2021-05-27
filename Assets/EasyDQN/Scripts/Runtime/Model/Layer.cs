@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace AillieoUtils
 {
+    [System.Serializable]
     public abstract class Layer
     {
         public abstract Matrix Forward(Matrix data);

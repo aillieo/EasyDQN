@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace AillieoUtils.AI
 {
-
+    [System.Serializable]
     public class FCLayer : Layer
     {
         // 第1层weight

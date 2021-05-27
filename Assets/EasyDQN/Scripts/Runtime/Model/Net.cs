@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace AillieoUtils.AI
 {
+    [System.Serializable]
     public class Net
     {
         private List<Layer> layers = new List<Layer>();

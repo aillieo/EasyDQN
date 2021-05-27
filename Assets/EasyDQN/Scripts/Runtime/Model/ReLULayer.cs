@@ -2,6 +2,7 @@ using System;
 
 namespace AillieoUtils.AI
 {
+    [System.Serializable]
     public class ReLULayer : Layer
     {
         private Matrix output;

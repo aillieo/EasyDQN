@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using AillieoUtils;
 using AillieoUtils.AI;
+using UnityEditor;
 using UnityEngine;
 
 namespace Sample
@@ -14,6 +16,7 @@ namespace Sample
         }
 
         private static TrainingManager ins;
+
         public static TrainingManager Instance
         {
             get
@@ -82,7 +85,25 @@ namespace Sample
         public void RecordScore(int step)
         {
             timeRecord.Add(step);
-            Debug.LogWarning($"step={step}  avg={timeRecord.Average(i => (float)i)}  timepassed={Time.timeSinceLevelLoad}");
+            Debug.Log($"step={step}  avg={timeRecord.Average(i => (float)i)}  timepassed={Time.timeSinceLevelLoad}");
+        }
+
+        public void Save(string path)
+        {
+            SerializeHelper.SerializeDataToBytes(dqn, path);
+        }
+
+        public void Load(string path)
+        {
+            SerializeHelper.DeserializeBytesToData(path, out DQN loaded);
+            if(loaded != null)
+            {
+                this.dqn = loaded;
+                foreach (var a in agents)
+                {
+                    a.Init(dqn);
+                }
+            }
         }
     }
 }

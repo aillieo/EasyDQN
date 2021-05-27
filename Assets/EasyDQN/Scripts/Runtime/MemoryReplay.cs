@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace AillieoUtils.AI
 {
+    [System.Serializable]
     public class MemoryReplay<T> : IEnumerable<T>, IEnumerable, ICollection<T>, ICollection
     {
         private readonly Queue<T> queue;

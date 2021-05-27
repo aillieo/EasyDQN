@@ -1,8 +1,6 @@
-EasyDQN
+## EasyDQN
 
----
-
-简单的强化学习算法DQN的实现，Sample是一个Cart-Pole环境。
+基于Unity的强化学习算法DQN的纯C#实现，Sample是一个Cart-Pole环境。
 
 训练刚开始时：
 
@@ -14,7 +12,7 @@ EasyDQN
 
 ---
 
-A simple implementation of the reinforcement learning algorithm DQN, and a Cart-Pole environment is used in the sample case.
+A simple implementation of the reinforcement learning algorithm DQN in pure C#, and a Cart-Pole environment is used in the sample case.
 
 Beginning of the training:
 
